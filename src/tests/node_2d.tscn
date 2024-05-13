@@ -13,3 +13,4 @@ position = Vector2(524, 312)
 
 [node name="SoccerPlayer2" parent="." instance=ExtResource("1_8rd07")]
 position = Vector2(146, 479)
+lock_rotation = true

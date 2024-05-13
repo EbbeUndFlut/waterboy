@@ -13,9 +13,9 @@ radius = 200.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77a6a"]
 
 [node name="SoccerPlayer" type="RigidBody2D"]
+gravity_scale = 1.66533e-16
 sleeping = true
 can_sleep = false
-freeze = true
 script = ExtResource("1_bbd2v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -46,5 +46,10 @@ fill_mode = 3
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.222
+autostart = true
+
 [connection signal="body_entered" from="DrinkArea" to="." method="_on_drink_area_body_entered"]
 [connection signal="body_exited" from="DrinkArea" to="." method="_on_drink_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
