@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjegp27yg4115"]
+
+[ext_resource type="Texture2D" uid="uid://fsf8ag24buos" path="res://assets/sprites/Sprite-0001.png" id="1_0otdr"]
+[ext_resource type="Script" path="res://sprite_2d.gd" id="2_thfs6"]
+
+[sub_resource type="Animation" id="Animation_20mgr"]
+resource_name = "run"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_s3x8b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x2xja"]
+_data = {
+"RESET": SubResource("Animation_s3x8b"),
+"run": SubResource("Animation_20mgr")
+}
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(190, 108)
+texture = ExtResource("1_0otdr")
+hframes = 2
+script = ExtResource("2_thfs6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x2xja")
+}
