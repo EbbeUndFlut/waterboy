@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwsyu7otqsfui"]
+[gd_scene load_steps=3 format=3 uid="uid://cwsyu7otqsfui"]
 
 [ext_resource type="PackedScene" uid="uid://bwfo7tvl4ewc1" path="res://src/entities/soccer_player.tscn" id="1_8rd07"]
+[ext_resource type="PackedScene" uid="uid://djmyn8iw3hxp3" path="res://src/entities/waterboy.tscn" id="2_awoit"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="SoccerPlayer" parent="." instance=ExtResource("1_8rd07")]
 position = Vector2(524, 312)
-multiplier = 10.0
+
+[node name="Waterboy" parent="." instance=ExtResource("2_awoit")]
+position = Vector2(524, 312)
+
+[node name="SoccerPlayer2" parent="." instance=ExtResource("1_8rd07")]
+position = Vector2(146, 479)
