@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwfo7tvl4ewc1"]
+[gd_scene load_steps=10 format=3 uid="uid://bwfo7tvl4ewc1"]
 
 [ext_resource type="Script" path="res://src/entities/soccer_player.gd" id="1_bbd2v"]
 [ext_resource type="Texture2D" uid="uid://kvvtr4onpc7j" path="res://assets/sprites/team_pink.png" id="2_gqlmp"]
@@ -12,9 +12,44 @@ radius = 200.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77a6a"]
 
+[sub_resource type="Animation" id="Animation_fvdat"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.57254]
+}
+
+[sub_resource type="Animation" id="Animation_5nwi8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ycbe8"]
+_data = {
+"RESET": SubResource("Animation_5nwi8"),
+"dead": SubResource("Animation_fvdat")
+}
+
 [node name="SoccerPlayer" type="RigidBody2D"]
 gravity_scale = 1.66533e-16
-sleeping = true
 can_sleep = false
 script = ExtResource("1_bbd2v")
 
@@ -47,9 +82,18 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 4.222
+wait_time = 8.0
 autostart = true
+
+[node name="DangerTime" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ycbe8")
+}
 
 [connection signal="body_entered" from="DrinkArea" to="." method="_on_drink_area_body_entered"]
 [connection signal="body_exited" from="DrinkArea" to="." method="_on_drink_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DangerTime" to="." method="_on_danger_time_timeout"]

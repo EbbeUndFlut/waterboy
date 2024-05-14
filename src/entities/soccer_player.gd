@@ -1,12 +1,20 @@
 class_name SoccerPlayer
 extends RigidBody2D
 
-@export var SPEED:float = 30
-enum Teams {BLUE,RED}
-@onready var water:Sprite2D = $water
 @export var team:Teams
+@export var SPEED:float = 30
+@export var state:State = State.ACTIVE
+
+
+@onready var water:Sprite2D = $water
 @onready var progress:ProgressBar = $ProgressBar
-var direction:Vector2=Vector2(0,0)
+@onready var danger_timer:Timer = $DangerTime
+@onready var animation:AnimationPlayer = $AnimationPlayer
+
+enum Teams {BLUE,RED}
+enum State {ACTIVE,DANGER,DEAD}
+
+var direction:Vector2=Vector2(2,0.4)
 var thirst:float = 0
 var multiplier: float = 1
 var speed:int= 10
@@ -19,18 +27,25 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	thirst += 1 * delta * multiplier
-	if thirst >= 80:
-		water.visible = true
-	if thirst <=50 and water.visible:
-		water.visible = false
-	progress.value =thirst
-	
-	if can_drink and Input.is_action_just_pressed("ui_accept"):
-		thirst = 0
+	if state != State.DEAD:
+		thirst += 1 * delta * multiplier
+		if thirst >= 80:
+			water.visible = true
+		if thirst <=50 and water.visible:
+			water.visible = false
+		if thirst >= 100 and state == State.ACTIVE:
+			state = State.DANGER
+			danger_timer.start()
+		progress.value =thirst
+		
+		if can_drink and Input.is_action_just_pressed("ui_accept"):
+			thirst = 0
+			state = State.ACTIVE
 
 func _physics_process(delta):
-	apply_force(direction)
+	
+	if state != State.DEAD:
+		apply_force(direction)
 	
 func _on_drink_area_body_entered(body):
 	var waterboy = body as WaterBoy
@@ -45,4 +60,13 @@ func _on_drink_area_body_exited(body):
 
 
 func _on_timer_timeout():
-	direction = Vector2(randf_range(0,1)*SPEED,randf_range(0,1)*SPEED)
+	if state != State.DEAD:
+		freeze = true
+		direction = Vector2(randf_range(0,1)*SPEED,randf_range(0,1)*SPEED)
+		freeze=false
+
+
+func _on_danger_time_timeout():
+	state = State.DEAD 
+	freeze=true
+	animation.set_current_animation("dead")
