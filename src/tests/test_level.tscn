@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwsyu7otqsfui"]
+[gd_scene load_steps=9 format=3 uid="uid://cwsyu7otqsfui"]
 
+[ext_resource type="Script" path="res://src/tests/test_level.gd" id="1_1upv6"]
 [ext_resource type="PackedScene" uid="uid://bwfo7tvl4ewc1" path="res://src/entities/soccer_player.tscn" id="1_8rd07"]
 [ext_resource type="PackedScene" uid="uid://djmyn8iw3hxp3" path="res://src/entities/waterboy.tscn" id="2_awoit"]
 [ext_resource type="AudioStream" uid="uid://drvx6kybyky2n" path="res://assets/audio/wyver9_Fast Level.wav" id="3_3ok1d"]
+[ext_resource type="PackedScene" uid="uid://bkxos1yd423ia" path="res://src/entities/enemy.tscn" id="4_nlf7q"]
+[ext_resource type="AudioStream" uid="uid://cg4mmhi1buel0" path="res://assets/audio/steam_whistle.wav" id="5_1fhdh"]
+[ext_resource type="PackedScene" uid="uid://cd43aqlclr51t" path="res://src/entities/ball.tscn" id="7_l2gvt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_058wt"]
 size = Vector2(66, 1590.51)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_1upv6")
 
 [node name="SoccerPlayer" parent="." instance=ExtResource("1_8rd07")]
 position = Vector2(524, 312)
@@ -31,10 +36,9 @@ lock_rotation = true
 position = Vector2(805, 521)
 lock_rotation = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_3ok1d")
 volume_db = -12.649
-autoplay = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-144, 378)
@@ -77,3 +81,22 @@ collision_mask = 2
 position = Vector2(1.09265, 329.744)
 shape = SubResource("RectangleShape2D_058wt")
 debug_color = Color(1, 0.878431, 0.223529, 0.65098)
+
+[node name="Enemy" parent="." instance=ExtResource("4_nlf7q")]
+position = Vector2(969, 137)
+
+[node name="Enemy2" parent="." instance=ExtResource("4_nlf7q")]
+position = Vector2(969, 791)
+
+[node name="Enemy3" parent="." instance=ExtResource("4_nlf7q")]
+position = Vector2(558, 466)
+
+[node name="Anpiff" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1fhdh")
+autoplay = true
+
+[node name="Ball" parent="." instance=ExtResource("7_l2gvt")]
+position = Vector2(415, 559)
+mass = 0.25
+
+[connection signal="finished" from="Anpiff" to="." method="_on_anpiff_finished"]
