@@ -48,7 +48,7 @@ _data = {
 "dead": SubResource("Animation_fvdat")
 }
 
-[node name="SoccerPlayer" type="RigidBody2D"]
+[node name="SoccerPlayer" type="RigidBody2D" groups=["soccer"]]
 collision_mask = 3
 gravity_scale = 1.66533e-16
 can_sleep = false

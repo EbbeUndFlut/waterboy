@@ -20,6 +20,7 @@ var multiplier: float = 1
 var speed:int= 10
 var accurancy:int=5
 var can_drink:bool = false
+var can_do:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	multiplier = randf_range(0.5,15)
@@ -27,25 +28,26 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if state != State.DEAD:
-		thirst += 1 * delta * multiplier
-		if thirst >= 80:
-			water.visible = true
-		if thirst <=50 and water.visible:
-			water.visible = false
-		if thirst >= 100 and state == State.ACTIVE:
-			state = State.DANGER
-			danger_timer.start()
-		progress.value =thirst
-		
-		if can_drink and Input.is_action_just_pressed("ui_accept"):
-			thirst = 0
-			state = State.ACTIVE
+	if can_do:
+		if state != State.DEAD:
+			thirst += 1 * delta * multiplier
+			if thirst >= 80:
+				water.visible = true
+			if thirst <=50 and water.visible:
+				water.visible = false
+			if thirst >= 100 and state == State.ACTIVE:
+				state = State.DANGER
+				danger_timer.start()
+			progress.value =thirst
+			
+			if can_drink and Input.is_action_just_pressed("ui_accept"):
+				thirst = 0
+				state = State.ACTIVE
 
 func _physics_process(delta):
-	
-	if state != State.DEAD:
-		apply_force(direction)
+	if can_do:
+		if state != State.DEAD:
+			apply_force(direction)
 	
 func _on_drink_area_body_entered(body):
 	var waterboy = body as WaterBoy
@@ -80,3 +82,5 @@ func _on_body_entered(body):
 func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	direction = Vector2(randf_range(-1,1)*SPEED,randf_range(-1,1)*SPEED)
 	print(direction)
+func anpfiff()->void:
+	can_do = true

@@ -9,7 +9,7 @@ size = Vector2(59, 120)
 [sub_resource type="CircleShape2D" id="CircleShape2D_uwjr8"]
 radius = 340.024
 
-[node name="Enemy" type="RigidBody2D"]
+[node name="Enemy" type="RigidBody2D" groups=["soccer"]]
 collision_mask = 3
 gravity_scale = 1.66533e-16
 can_sleep = false
