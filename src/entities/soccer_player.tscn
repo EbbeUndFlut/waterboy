@@ -12,21 +12,6 @@ radius = 200.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77a6a"]
 
-[sub_resource type="Animation" id="Animation_fvdat"]
-resource_name = "dead"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.57254]
-}
-
 [sub_resource type="Animation" id="Animation_5nwi8"]
 length = 0.001
 tracks/0/type = "value"
@@ -42,6 +27,21 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_fvdat"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.57254]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ycbe8"]
 _data = {
 "RESET": SubResource("Animation_5nwi8"),
@@ -49,8 +49,12 @@ _data = {
 }
 
 [node name="SoccerPlayer" type="RigidBody2D"]
+collision_mask = 3
 gravity_scale = 1.66533e-16
 can_sleep = false
+max_contacts_reported = 2
+contact_monitor = true
+angular_damp = 100.0
 script = ExtResource("1_bbd2v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -93,6 +97,8 @@ libraries = {
 "": SubResource("AnimationLibrary_ycbe8")
 }
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
 [connection signal="body_entered" from="DrinkArea" to="." method="_on_drink_area_body_entered"]
 [connection signal="body_exited" from="DrinkArea" to="." method="_on_drink_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -14,7 +14,7 @@ extends RigidBody2D
 enum Teams {BLUE,RED}
 enum State {ACTIVE,DANGER,DEAD}
 
-var direction:Vector2=Vector2(2,0.4)
+var direction:Vector2=Vector2(4,1)
 var thirst:float = 0
 var multiplier: float = 1
 var speed:int= 10
@@ -23,7 +23,7 @@ var can_drink:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	multiplier = randf_range(0.5,15)
-	
+	print(direction)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -62,7 +62,7 @@ func _on_drink_area_body_exited(body):
 func _on_timer_timeout():
 	if state != State.DEAD:
 		freeze = true
-		direction = Vector2(randf_range(0,1)*SPEED,randf_range(0,1)*SPEED)
+		direction = Vector2(randf_range(-1,1)*SPEED,randf_range(-1,1)*SPEED)
 		freeze=false
 
 
@@ -70,3 +70,13 @@ func _on_danger_time_timeout():
 	state = State.DEAD 
 	freeze=true
 	animation.set_current_animation("dead")
+
+
+func _on_body_entered(body):
+	direction = Vector2(randf_range(-1,1)*SPEED,randf_range(-1,1)*SPEED)
+	print(direction)
+
+
+func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	direction = Vector2(randf_range(-1,1)*SPEED,randf_range(-1,1)*SPEED)
+	print(direction)
