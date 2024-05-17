@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/tests/test_level.gd" id="1_1upv6"]
 [ext_resource type="PackedScene" uid="uid://bwfo7tvl4ewc1" path="res://src/entities/soccer_player.tscn" id="1_8rd07"]
 [ext_resource type="PackedScene" uid="uid://djmyn8iw3hxp3" path="res://src/entities/waterboy.tscn" id="2_awoit"]
-[ext_resource type="AudioStream" uid="uid://drvx6kybyky2n" path="res://assets/audio/wyver9_Fast Level.wav" id="3_3ok1d"]
+[ext_resource type="AudioStream" uid="uid://drvx6kybyky2n" path="res://assets/audio/menu_sound.wav" id="3_3ok1d"]
 [ext_resource type="PackedScene" uid="uid://bkxos1yd423ia" path="res://src/entities/enemy.tscn" id="4_nlf7q"]
 [ext_resource type="AudioStream" uid="uid://cg4mmhi1buel0" path="res://assets/audio/steam_whistle.wav" id="5_1fhdh"]
 [ext_resource type="PackedScene" uid="uid://cd43aqlclr51t" path="res://src/entities/ball.tscn" id="7_l2gvt"]

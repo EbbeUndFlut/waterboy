@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://cweiqtam08jar"]
+
+[ext_resource type="Texture2D" uid="uid://c5q6inlia0spt" path="res://assets/sprites/field_bg.png" id="1_65mmi"]
+[ext_resource type="Script" path="res://src/screens/main_menu.gd" id="1_sqh7p"]
+[ext_resource type="AudioStream" uid="uid://drvx6kybyky2n" path="res://assets/audio/menu_sound.wav" id="3_02kvi"]
+[ext_resource type="Script" path="res://src/screens/Pathspawner.gd" id="4_dhf3c"]
+[ext_resource type="Texture2D" uid="uid://pvj8fanrc6l0" path="res://assets/sprites/romy.png" id="4_j1ig2"]
+[ext_resource type="Script" path="res://src/screens/RomyMainMenuSprite.gd" id="5_1t6dr"]
+
+[sub_resource type="Curve2D" id="Curve2D_07m4w"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 761, 361, 0, 0, 0, 0, 1082, 204, 0, 0, 0, 0, 1386, 395, 0, 0, 0, 0, 1477, 843, 0, 0, 0, 0, 1219, 984, 0, 0, 0, 0, 770, 941, 0, 0, 0, 0, 606, 781, 0, 0, 0, 0, 981, 563, 0, 0, 0, 0, 1237, 582, 0, 0, 0, 0, 769, 369)
+}
+point_count = 10
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_sqh7p")
+
+[node name="FieldBg" type="Sprite2D" parent="."]
+position = Vector2(972.5, 553.5)
+scale = Vector2(1.31887, 1.35169)
+texture = ExtResource("1_65mmi")
+
+[node name="HowToPlayBtn" type="Button" parent="."]
+offset_left = 888.0
+offset_top = 735.0
+offset_right = 1262.0
+offset_bottom = 862.0
+theme_override_font_sizes/font_size = 64
+text = "How to play"
+
+[node name="QuitBtn" type="Button" parent="."]
+offset_left = 1324.0
+offset_top = 460.0
+offset_right = 1630.0
+offset_bottom = 587.0
+theme_override_font_sizes/font_size = 64
+text = "Noob"
+
+[node name="StartBtn" type="Button" parent="."]
+offset_left = 487.0
+offset_top = 456.0
+offset_right = 793.0
+offset_bottom = 583.0
+theme_override_font_sizes/font_size = 64
+text = "Start"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_02kvi")
+autoplay = true
+
+[node name="Pathspawner" type="Node2D" parent="."]
+script = ExtResource("4_dhf3c")
+
+[node name="Path2D" type="Path2D" parent="Pathspawner"]
+curve = SubResource("Curve2D_07m4w")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Pathspawner/Path2D"]
+position = Vector2(761, 361)
+rotation = -0.454887
+
+[node name="Romy" type="Sprite2D" parent="Pathspawner/Path2D/PathFollow2D"]
+position = Vector2(257.949, 396.67)
+rotation = 0.454887
+texture = ExtResource("4_j1ig2")
+script = ExtResource("5_1t6dr")
+
+[connection signal="pressed" from="HowToPlayBtn" to="." method="_on_how_to_play_btn_pressed"]
+[connection signal="pressed" from="QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="StartBtn" to="." method="_on_start_btn_pressed"]

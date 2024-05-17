@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://5bflu3nao4pn"]
+
+[ext_resource type="Script" path="res://src/screens/faqs.gd" id="1_1jiqk"]
+[ext_resource type="Texture2D" uid="uid://c5q6inlia0spt" path="res://assets/sprites/field_bg.png" id="1_u6n5j"]
+[ext_resource type="AudioStream" uid="uid://drvx6kybyky2n" path="res://assets/audio/menu_sound.wav" id="3_nry6a"]
+
+[node name="FAQs" type="Node2D"]
+script = ExtResource("1_1jiqk")
+
+[node name="FieldBg" type="Sprite2D" parent="."]
+position = Vector2(1017.5, 561.5)
+scale = Vector2(1.4044, 1.37865)
+texture = ExtResource("1_u6n5j")
+
+[node name="BackToMenuBtn" type="Button" parent="."]
+offset_left = 275.0
+offset_top = 129.0
+offset_right = 707.0
+offset_bottom = 225.0
+theme_override_font_sizes/font_size = 64
+text = "Back to Menu"
+
+[node name="Controls" type="RichTextLabel" parent="."]
+offset_left = 1020.0
+offset_top = 111.0
+offset_right = 1793.0
+offset_bottom = 343.0
+theme_override_font_sizes/normal_font_size = 64
+text = "Movement: Arrow Keys
+Interaction: Space-Bar"
+
+[node name="HowToPlay" type="RichTextLabel" parent="."]
+offset_left = 279.0
+offset_top = 501.0
+offset_right = 1761.0
+offset_bottom = 853.0
+theme_override_font_sizes/normal_font_size = 48
+text = "You control your player with the arrow keys and have to supply the players with water. your team players need different amounts of water, supply them all quickly enough to gain experience so that you can get better.
+If your team gets water too late, they will die, so be quick."
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nry6a")
+autoplay = true
+
+[connection signal="pressed" from="BackToMenuBtn" to="." method="_on_back_to_menu_btn_pressed"]
