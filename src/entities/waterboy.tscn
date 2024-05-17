@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://djmyn8iw3hxp3"]
 
 [ext_resource type="Script" path="res://src/entities/waterboy.gd" id="1_18iui"]
-[ext_resource type="Texture2D" uid="uid://smjqdfcnh387" path="res://assets/sprites/player_sprite.png" id="1_sbpka"]
+[ext_resource type="Texture2D" uid="uid://pvj8fanrc6l0" path="res://assets/sprites/romy.png" id="2_4w5hf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fc7"]
 size = Vector2(58, 119)
@@ -11,7 +11,7 @@ motion_mode = 1
 script = ExtResource("1_18iui")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_sbpka")
+texture = ExtResource("2_4w5hf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 3.5)

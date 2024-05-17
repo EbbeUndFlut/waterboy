@@ -13,6 +13,7 @@ radius = 32.0
 mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_1m1wj")
 gravity_scale = 1.66533e-16
+can_sleep = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

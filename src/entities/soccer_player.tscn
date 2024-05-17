@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwfo7tvl4ewc1"]
+[gd_scene load_steps=11 format=3 uid="uid://bwfo7tvl4ewc1"]
 
 [ext_resource type="Script" path="res://src/entities/soccer_player.gd" id="1_bbd2v"]
-[ext_resource type="Texture2D" uid="uid://kvvtr4onpc7j" path="res://assets/sprites/team_pink.png" id="2_gqlmp"]
+[ext_resource type="Texture2D" uid="uid://v8bbamgxkvxf" path="res://assets/sprites/soccer_sheet.png" id="2_0inxe"]
 [ext_resource type="Texture2D" uid="uid://dyop3i132f2bf" path="res://assets/sprites/water_sprite.png" id="3_l6d5m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5if3"]
@@ -26,6 +26,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_fvdat"]
 resource_name = "dead"
@@ -42,10 +54,28 @@ tracks/0/keys = {
 "values": [0.0, 1.57254]
 }
 
+[sub_resource type="Animation" id="Animation_b3r63"]
+resource_name = "running"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ycbe8"]
 _data = {
 "RESET": SubResource("Animation_5nwi8"),
-"dead": SubResource("Animation_fvdat")
+"dead": SubResource("Animation_fvdat"),
+"running": SubResource("Animation_b3r63")
 }
 
 [node name="SoccerPlayer" type="RigidBody2D" groups=["soccer"]]
@@ -62,7 +92,8 @@ position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_v5if3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_gqlmp")
+texture = ExtResource("2_0inxe")
+hframes = 2
 
 [node name="water" type="Sprite2D" parent="."]
 visible = false
