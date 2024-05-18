@@ -1,14 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://djmyn8iw3hxp3"]
+[gd_scene load_steps=8 format=3 uid="uid://djmyn8iw3hxp3"]
 
 [ext_resource type="Script" path="res://src/entities/waterboy.gd" id="1_18iui"]
 [ext_resource type="Texture2D" uid="uid://pvj8fanrc6l0" path="res://assets/sprites/romy.png" id="2_4w5hf"]
+[ext_resource type="PackedScene" uid="uid://2epjy3n4e30y" path="res://src/entities/watercups/small_cup.tscn" id="3_dbby2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fc7"]
 size = Vector2(58, 119)
 
-[node name="Waterboy" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6apu2"]
+radius = 225.109
+
+[sub_resource type="SystemFont" id="SystemFont_8m6tm"]
+font_names = PackedStringArray("Monospace")
+msdf_pixel_range = 22
+msdf_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_de76o"]
+font = SubResource("SystemFont_8m6tm")
+font_size = 68
+font_color = Color(0.054902, 0.054902, 0.054902, 1)
+
+[node name="Waterboy" type="CharacterBody2D" node_paths=PackedStringArray("cup")]
 motion_mode = 1
 script = ExtResource("1_18iui")
+cup = NodePath("SmallCup")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_4w5hf")
@@ -19,3 +34,34 @@ shape = SubResource("RectangleShape2D_c7fc7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
+
+[node name="SmallCup" parent="." instance=ExtResource("3_dbby2")]
+position = Vector2(53, 18)
+anti_thirst_amount = 30.0
+
+[node name="ActionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("CircleShape2D_6apu2")
+debug_color = Color(0.619608, 0.533333, 0.0705882, 0.419608)
+
+[node name="MatchOverLabel" type="Label" parent="."]
+visible = false
+offset_left = -201.0
+offset_top = -36.0
+offset_right = 209.0
+offset_bottom = 33.0
+text = "Match Over"
+label_settings = SubResource("LabelSettings_de76o")
+
+[node name="MatchTimerLabel" type="Label" parent="."]
+offset_left = -204.0
+offset_top = -342.0
+offset_right = 206.0
+offset_bottom = -273.0
+text = "0:00"
+label_settings = SubResource("LabelSettings_de76o")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="ActionArea" to="." method="_on_action_area_body_entered"]
+[connection signal="body_exited" from="ActionArea" to="." method="_on_action_area_body_exited"]

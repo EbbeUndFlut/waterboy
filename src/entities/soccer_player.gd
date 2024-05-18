@@ -40,14 +40,18 @@ func _process(delta):
 				danger_timer.start()
 			progress.value =thirst
 			
-			if can_drink and Input.is_action_just_pressed("ui_accept"):
-				thirst = 0
-				state = State.ACTIVE
 
 func _physics_process(delta):
 	if can_do:
 		if state != State.DEAD:
 			apply_force(direction)
+	
+func get_thirst()->float:
+	return thirst
+
+func set_thirst(value:float)->void:
+	print('Lösche den durdt',value)
+	thirst = value
 	
 func _on_drink_area_body_entered(body):
 	var waterboy = body as WaterBoy

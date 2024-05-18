@@ -4,8 +4,19 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 
+var target:SoccerPlayer=null
+var station:WaterStation=null
+@export var cup:WaterCup
 
+func _ready():
+	pass
 
+func _process(delta):
+	print(station)
+	if target and Input.is_action_just_pressed("ui_accept"):
+		target.set_thirst(target.get_thirst()-cup._use())
+	if station and Input.is_action_just_pressed("ui_accept"):
+		cup._refill()
 
 func _physics_process(delta):
 	
@@ -32,3 +43,17 @@ func _physics_process(delta):
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_action_area_body_entered(body):
+	print(body)
+	target = body as SoccerPlayer
+	station = body as WaterStation
+
+
+func _on_action_area_body_exited(body):
+	if body == target:
+		target = null
+	elif body == station:
+		station == null
+	print('taregt',target)

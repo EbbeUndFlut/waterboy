@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://2epjy3n4e30y"]
+
+[ext_resource type="Script" path="res://src/entities/watercups/smallcup.gd" id="1_ldpv8"]
+[ext_resource type="Texture2D" uid="uid://bxgj33l17y7f6" path="res://assets/sprites/cup.png" id="2_4fjg8"]
+
+[node name="SmallCup" type="Node2D"]
+script = ExtResource("1_ldpv8")
+charges = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4fjg8")
+hframes = 2
+frame = 1
+
+[connection signal="cup_empty" from="." to="." method="_on_cup_empty"]
+[connection signal="cup_full" from="." to="." method="_on_cup_full"]
