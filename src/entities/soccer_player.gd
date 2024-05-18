@@ -30,7 +30,8 @@ func _ready():
 func _process(delta):
 	if can_do:
 		if state != State.DEAD:
-			thirst += 1 * delta * multiplier
+			if thirst < 100:
+				thirst += 1 * delta * multiplier
 			if thirst >= 80:
 				water.visible = true
 			if thirst <=50 and water.visible:
@@ -73,9 +74,10 @@ func _on_timer_timeout():
 
 
 func _on_danger_time_timeout():
-	state = State.DEAD 
-	freeze=true
-	animation.set_current_animation("dead")
+	if thirst >= 100:
+		state = State.DEAD 
+		freeze=true
+		animation.set_current_animation("dead")
 
 
 func _on_body_entered(body):

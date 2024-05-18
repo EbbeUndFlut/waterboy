@@ -78,7 +78,7 @@ _data = {
 "running": SubResource("Animation_b3r63")
 }
 
-[node name="SoccerPlayer" type="RigidBody2D" groups=["soccer"]]
+[node name="SoccerPlayer" type="RigidBody2D" groups=["friends", "soccer"]]
 collision_mask = 3
 gravity_scale = 1.66533e-16
 can_sleep = false
