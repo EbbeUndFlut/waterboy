@@ -26,4 +26,5 @@ func _on_anpiff_finished():
 
 func _on_match_timer_timeout():
 	get_tree().paused = true
+	anpfiff.play()
 	waterboy.get_node("MatchOverLabel").visible = true
