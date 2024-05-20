@@ -10,6 +10,7 @@ extends RigidBody2D
 @onready var progress:ProgressBar = $ProgressBar
 @onready var danger_timer:Timer = $DangerTime
 @onready var animation:AnimationPlayer = $AnimationPlayer
+@onready var highlight:Sprite2D = $HighLightSprite
 
 enum Teams {BLUE,RED}
 enum State {ACTIVE,DANGER,DEAD}
@@ -51,7 +52,7 @@ func get_thirst()->float:
 	return thirst
 
 func set_thirst(value:float)->void:
-	print('Lösche den durdt',value)
+	
 	thirst = value
 	
 func _on_drink_area_body_entered(body):
@@ -78,16 +79,21 @@ func _on_danger_time_timeout():
 		state = State.DEAD 
 		freeze=true
 		animation.set_current_animation("dead")
+	else:
+		state = State.ACTIVE
 
 
 func _on_body_entered(body):
 	direction = Vector2(randf_range(-1,1)*SPEED,randf_range(-1,1)*SPEED)
-	print(direction)
+
 
 
 func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	direction = Vector2(randf_range(-1,1)*SPEED,randf_range(-1,1)*SPEED)
-	print(direction)
+
 func anpfiff()->void:
 	can_do = true
 	animation.set_current_animation("running")
+
+func changeHighlight()->void:
+	highlight.visible = !highlight.visible

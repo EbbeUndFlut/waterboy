@@ -1,6 +1,7 @@
 class_name WaterBoy
 extends CharacterBody2D
 
+signal main
 
 const SPEED = 300.0
 
@@ -12,7 +13,7 @@ func _ready():
 	pass
 
 func _process(delta):
-	print(station)
+	
 	if target and Input.is_action_just_pressed("ui_accept"):
 		target.set_thirst(target.get_thirst()-cup._use())
 	if station and Input.is_action_just_pressed("ui_accept"):
@@ -26,6 +27,7 @@ func _physics_process(delta):
 	var direction = Input.get_axis("LEFT", "RIGHT")
 	if direction and Input.is_action_pressed("alt"):
 		velocity.x = direction * (SPEED*2)
+		
 	
 		
 	elif direction:
@@ -46,14 +48,21 @@ func _physics_process(delta):
 
 
 func _on_action_area_body_entered(body):
-	print(body)
-	target = body as SoccerPlayer
+	if target == null:
+		target = body as SoccerPlayer
+		if target:
+			target.changeHighlight()
 	station = body as WaterStation
 
 
 func _on_action_area_body_exited(body):
 	if body == target:
+		target.changeHighlight()
 		target = null
 	elif body == station:
 		station == null
-	print('taregt',target)
+	
+
+
+func _on_button_button_down():
+	emit_signal("main")# Replace with function body.

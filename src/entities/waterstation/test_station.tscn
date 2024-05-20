@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm87ndeky5f4q"]
+[gd_scene load_steps=4 format=3 uid="uid://bm87ndeky5f4q"]
 
 [ext_resource type="Script" path="res://src/entities/waterstation/test_station.gd" id="1_eu22f"]
+[ext_resource type="Texture2D" uid="uid://cfwwj4b0h6ro" path="res://assets/sprites/water.png" id="2_00mmw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nqrkm"]
-size = Vector2(60, 20)
+size = Vector2(143, 125)
 
 [node name="TestStation" type="StaticBody2D"]
 script = ExtResource("1_eu22f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(22.5, 30.5)
 shape = SubResource("RectangleShape2D_nqrkm")
 debug_color = Color(0.321569, 0.658824, 0.92549, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_00mmw")

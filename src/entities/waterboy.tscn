@@ -12,6 +12,7 @@ radius = 225.109
 
 [sub_resource type="SystemFont" id="SystemFont_8m6tm"]
 font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
 msdf_pixel_range = 22
 msdf_size = 50
 
@@ -54,6 +55,15 @@ offset_bottom = 33.0
 text = "Match Over"
 label_settings = SubResource("LabelSettings_de76o")
 
+[node name="MatchPointsLabel" type="Label" parent="."]
+visible = false
+offset_left = -187.0
+offset_top = 168.0
+offset_right = 223.0
+offset_bottom = 237.0
+text = "Match Over"
+label_settings = SubResource("LabelSettings_de76o")
+
 [node name="MatchTimerLabel" type="Label" parent="."]
 offset_left = -204.0
 offset_top = -342.0
@@ -63,5 +73,15 @@ text = "0:00"
 label_settings = SubResource("LabelSettings_de76o")
 horizontal_alignment = 1
 
+[node name="Button" type="Button" parent="."]
+process_mode = 2
+visible = false
+offset_left = -40.0
+offset_top = 293.0
+offset_right = 51.0
+offset_bottom = 324.0
+text = "back"
+
 [connection signal="body_entered" from="ActionArea" to="." method="_on_action_area_body_entered"]
 [connection signal="body_exited" from="ActionArea" to="." method="_on_action_area_body_exited"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
